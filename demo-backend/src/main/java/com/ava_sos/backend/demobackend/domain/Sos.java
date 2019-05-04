@@ -10,17 +10,18 @@ import javax.persistence.*;
 @Table(name = "SOS")
 public class Sos extends AbstractEntity<Long>{
     
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 30)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 60)
     private String description;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 60)
     private String mkaos_model;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false, unique = false, length = 60)
     private String constituent_model;
+
 
     public String getName() {
         return name;
@@ -53,7 +54,4 @@ public class Sos extends AbstractEntity<Long>{
     public void setConstituent_model(String constituent_model) {
         this.constituent_model = constituent_model;
     }
-
-
-    
 }
