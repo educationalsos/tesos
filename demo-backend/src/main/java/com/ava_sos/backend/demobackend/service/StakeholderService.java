@@ -9,9 +9,9 @@ import com.ava_sos.backend.demobackend.domain.Stakeholder;
  */
 public interface StakeholderService {
 
-    public void save(Stakeholder sos);	
+    public void save(Stakeholder task);	
     
-    public void update(Stakeholder sos);
+    public void update(Stakeholder task);
 	
 	public void delete(Long id);
 	

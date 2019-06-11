@@ -19,10 +19,6 @@ public class Sos extends AbstractEntity<Long>{
     @Column(nullable = false, unique = true, length = 60)
     private String mkaos_model;
 
-    @Column(nullable = false, unique = false, length = 60)
-    private String constituent_model;
-
-
     public String getName() {
         return name;
     }
@@ -47,11 +43,4 @@ public class Sos extends AbstractEntity<Long>{
         this.mkaos_model = mkaos_model;
     }
 
-    public String getConstituent_model() {
-        return constituent_model;
-    }
-
-    public void setConstituent_model(String constituent_model) {
-        this.constituent_model = constituent_model;
-    }
 }
