@@ -1,5 +1,7 @@
 package com.ava_sos.backend.demobackend.domain;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -18,6 +20,20 @@ public class Sos extends AbstractEntity<Long>{
 
     @Column(nullable = false, unique = true, length = 60)
     private String mkaos_model;
+
+    @OneToMany(mappedBy = "Stakeholder")
+    private List<Stakeholder> tasks;
+
+    @ManyToMany
+    @JoinTable(
+        name = "SOS_Models", 
+        joinColumns = @JoinColumn(name = "SOS_id"), 
+        inverseJoinColumns = @JoinColumn(name = "model_id")
+    )
+    private List<ConstModel> models;
+
+
+    
 
     public String getName() {
         return name;
@@ -41,6 +57,22 @@ public class Sos extends AbstractEntity<Long>{
 
     public void setMkaos_model(String mkaos_model) {
         this.mkaos_model = mkaos_model;
+    }
+
+    public List<Stakeholder> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Stakeholder> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<ConstModel> getModels() {
+        return models;
+    }
+
+    public void setModels(List<ConstModel> models) {
+        this.models = models;
     }
 
 }
