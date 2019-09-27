@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ava_sos.backend.demobackend.DemoApplication",
+            "projectName": "backend",
+            "args": ""
+        }
+    ]
+}
