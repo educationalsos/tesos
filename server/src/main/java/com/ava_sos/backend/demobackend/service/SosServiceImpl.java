@@ -5,6 +5,7 @@ import java.util.List;
 import com.ava_sos.backend.demobackend.dao.SosDao;
 import com.ava_sos.backend.demobackend.domain.Sos;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service @Transactional
 public class SosServiceImpl implements SosService {
 
+    @Autowired
     SosDao dao;
     
     @Override

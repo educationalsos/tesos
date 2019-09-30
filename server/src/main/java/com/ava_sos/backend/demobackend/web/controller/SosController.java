@@ -33,19 +33,20 @@ public class SosController {
     @GetMapping("/list")
     @CrossOrigin(origins = "http://localhost:4200")
     public List<Sos> findAll() {  
-        return sos_service.findAll();  
-    }  
-      
+        return sos_service.findAll();
+
+    }
+
     @DeleteMapping("/delete/{sos_id}")
-    @CrossOrigin(origins = "http://localhost:4200")  
-    public void delete(@PathVariable("sos_id") Long sos_id) {  
-        sos_service.delete(sos_id);;  
-    }  
-  
-    @GetMapping("/a/{sos_id}")  
     @CrossOrigin(origins = "http://localhost:4200")
-    public Sos findByID(@PathVariable("sos_id") long sos_id) {    
-        return sos_service.findId(sos_id);  
+    public void delete(@PathVariable("sos_id") Long sos_id) {
+        sos_service.delete(sos_id);
+    }
+
+    @GetMapping("/{sos_id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Sos findByID(@PathVariable("sos_id") long sos_id) {
+        return sos_service.findId(sos_id);
           
     }  
       
