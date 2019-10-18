@@ -23,7 +23,7 @@ public class Sos extends AbstractEntity<Long>{
     private String mkaos_model;
 
     @OneToMany(mappedBy = "sos")
-    private List<Stakeholder> tasks;
+    private List<Stakeholder> stakeholders;
 
     @ManyToMany
     @JoinTable(
@@ -57,12 +57,12 @@ public class Sos extends AbstractEntity<Long>{
         this.mkaos_model = mkaos_model;
     }
 
-    public List<Stakeholder> getTasks() {
-        return tasks;
+    public List<Stakeholder> getStakeholders() {
+        return stakeholders;
     }
 
-    public void setTasks(List<Stakeholder> tasks) {
-        this.tasks = tasks;
+    public void setStakeholders(List<Stakeholder> stakeholders) {
+        this.stakeholders = stakeholders;
     }
 
     public List<ConstModel> getModels() {
