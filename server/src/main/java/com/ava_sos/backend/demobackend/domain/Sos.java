@@ -19,7 +19,7 @@ public class Sos extends AbstractEntity<Long>{
     @Column(nullable = true, length = 60)
     private String description;
 
-    @Column(nullable = true, unique = true, length = 60)
+    @Column(nullable = true, length = 60)
     private String mkaos_model;
 
     @OneToMany(mappedBy = "sos")
