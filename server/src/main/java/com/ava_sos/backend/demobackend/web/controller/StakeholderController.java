@@ -2,7 +2,9 @@ package com.ava_sos.backend.demobackend.web.controller;
 
 import java.util.List;
 
+import com.ava_sos.backend.demobackend.domain.Sos;
 import com.ava_sos.backend.demobackend.domain.Stakeholder;
+import com.ava_sos.backend.demobackend.service.SosService;
 import com.ava_sos.backend.demobackend.service.StakeholderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,14 @@ public class StakeholderController {
     @Autowired  
     private StakeholderService stake_service;  
 
+    @Autowired
+    private SosService sos_service;
+
     @PostMapping("/save")
     @CrossOrigin(origins = "http://localhost:4200")  
     public void save(@RequestBody Stakeholder stake) {  
+        Sos aux = sos_service.findLast();
+        stake.setSos(aux);
         stake_service.save(stake);  
 
     }  

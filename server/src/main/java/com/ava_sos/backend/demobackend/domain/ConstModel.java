@@ -14,21 +14,21 @@ import javax.persistence.*;
 public class ConstModel extends AbstractEntity<Long> {
     
     @Column(nullable = false, unique = true, length = 30)
-    private String file;
+    private String path;
 
     @OneToMany(mappedBy = "model")
     private List<Services> services;
 
-    @ManyToMany(mappedBy = "models")
-    private List<Sos> sos;
+    @ManyToOne
+    @JoinColumn(name = "sos_id")
+    private Sos sos;
     
-
     public String getFile() {
-        return file;
+        return path;
     }
 
-    public void setFile(String file) {
-        this.file = file;
+    public void setFile(String path) {
+        this.path = path;
     }
 
     public List<Services> getServices() {
@@ -39,11 +39,11 @@ public class ConstModel extends AbstractEntity<Long> {
         this.services = services;
     }
 
-    public List<Sos> getSos() {
+    public Sos getSos() {
         return sos;
     }
 
-    public void setSos(List<Sos> sos) {
+    public void setSos(Sos sos) {
         this.sos = sos;
     }
 

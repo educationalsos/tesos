@@ -44,5 +44,8 @@ public class SosServiceImpl implements SosService {
         dao.update(sos);
     }
 
-    
+    public Sos findLast(){
+        List<Sos> list = dao.findAll();
+        return list.get(list.size()-1);
+    }
 }

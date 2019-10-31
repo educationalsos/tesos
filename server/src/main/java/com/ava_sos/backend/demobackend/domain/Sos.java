@@ -25,12 +25,7 @@ public class Sos extends AbstractEntity<Long>{
     @OneToMany(mappedBy = "sos")
     private List<Stakeholder> stakeholders;
 
-    @ManyToMany
-    @JoinTable(
-        name = "SOS_Models", 
-        joinColumns = @JoinColumn(name = "SOS_id"), 
-        inverseJoinColumns = @JoinColumn(name = "model_id")
-    )
+    @OneToMany(mappedBy = "sos")
     private List<ConstModel> models;
 
     public String getName() {

@@ -18,4 +18,6 @@ public interface SosService {
     public Sos findId(Long id);
     
     public List<Sos> findAll();
+
+    public Sos findLast();
 }

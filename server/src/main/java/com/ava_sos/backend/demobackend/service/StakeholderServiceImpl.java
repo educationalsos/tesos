@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ava_sos.backend.demobackend.dao.StakeholderDao;
 import com.ava_sos.backend.demobackend.domain.Stakeholder;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Service @Transactional
 public class StakeholderServiceImpl implements StakeholderService {
 
+    @Autowired
     StakeholderDao dao;
 
     @Override
