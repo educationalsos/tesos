@@ -1,22 +1,23 @@
 package com.ava_sos.backend.demobackend.domain;
 
-
 import javax.persistence.*;
+
+
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Services")
 public class Services extends AbstractEntity<Long> {
 
-    @ManyToOne
+    @ManyToOne(fetch =FetchType.LAZY )
     @JoinColumn(name = "model_id")
     private ConstModel model;
 
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = false, unique = true, length = 100)
     private String link;
 
-    @Column(nullable = false, unique = true, length = 60)
-    private String description;
+    @Column(nullable = false, unique = false, length = 60)
+    private String name;
 
     public ConstModel getModel() {
         return model;
@@ -34,12 +35,12 @@ public class Services extends AbstractEntity<Long> {
         this.link = link;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
     
 }

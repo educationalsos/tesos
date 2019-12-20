@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
 
 /**
  * Sos
@@ -22,10 +23,13 @@ public class Sos extends AbstractEntity<Long>{
     @Column(nullable = true, length = 60)
     private String mkaos_model;
 
-    @OneToMany(mappedBy = "sos")
+    @OneToMany(mappedBy = "sos", fetch = FetchType.EAGER)
+    @Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
     private List<Stakeholder> stakeholders;
 
-    @OneToMany(mappedBy = "sos")
+    
+    @OneToMany(mappedBy = "sos", fetch = FetchType.EAGER)
+    @Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
     private List<ConstModel> models;
 
     public String getName() {

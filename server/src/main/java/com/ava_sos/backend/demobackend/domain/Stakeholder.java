@@ -14,7 +14,7 @@ public class Stakeholder extends AbstractEntity<Long> {
     @Column(nullable = false, unique = true, length = 30)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sos_id")
     private Sos sos;
 

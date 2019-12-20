@@ -7,7 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+
 import com.ava_sos.backend.demobackend.domain.Sos;
+
 import com.ava_sos.backend.demobackend.service.SosService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,9 +68,17 @@ public class SosController {
     @PostMapping("/upload_file")
     @CrossOrigin(origins = "http://localhost:4200")
     @ResponseBody
-    public void uploadFile(@RequestPart("file") MultipartFile file) throws IOException {
+    public void uploadFile(@RequestPart("file") MultipartFile file, @RequestPart("name") String sos, @RequestPart("type") String t) throws IOException {
         byte[] bytes = file.getBytes();
-        Path path = Paths.get("/home/goncazevedo/", file.getOriginalFilename());
+        Path path;
+        if (t.equals("1")) {
+            new File("../uploads/mkaos_models/"+sos).mkdirs();
+            path = Paths.get("../uploads/mkaos_models/"+sos, file.getOriginalFilename());
+            
+        } else {
+            new File("../uploads/constituents_models/"+sos).mkdirs();
+            path = Paths.get("../uploads/constituents_models/"+sos, file.getOriginalFilename());
+        }
         Files.write(path, bytes);
  
     }

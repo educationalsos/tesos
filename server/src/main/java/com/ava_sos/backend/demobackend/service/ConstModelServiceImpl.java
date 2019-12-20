@@ -5,6 +5,7 @@ import java.util.List;
 import com.ava_sos.backend.demobackend.dao.ConstModelDao;
 import com.ava_sos.backend.demobackend.domain.ConstModel;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = "http://localhost:4200")
 public class ConstModelServiceImpl implements ConstModelService {
 
+    @Autowired
     ConstModelDao dao;
 
     @Override
@@ -44,5 +46,24 @@ public class ConstModelServiceImpl implements ConstModelService {
         return dao.findAll();
     }
 
+    @Override @Transactional(readOnly = true)
+    public List<ConstModel> findBySos(Long sosId) {
+        List<ConstModel> aux = dao.findAll();
+        for (ConstModel model : aux) {
+            if (model.getSos().getId() != sosId)
+                aux.remove(model);    
+        }
+        return aux;
+    }
+    
+    @Override @Transactional(readOnly = true)
+    public ConstModel findByPath(String path) {
+        List<ConstModel> aux = dao.findAll();
+        for (ConstModel model : aux) {
+            if (model.getPath().equals(path))
+                return model;    
+        }
+        return null;
+    }
     
 }

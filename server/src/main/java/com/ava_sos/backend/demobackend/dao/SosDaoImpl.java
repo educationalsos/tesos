@@ -11,5 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SosDaoImpl extends AbstractDao<Sos, Long> implements SosDao {
 
-    
 }

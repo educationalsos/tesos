@@ -18,4 +18,8 @@ public interface ConstModelService {
     public ConstModel findId(Long id);
     
     public List<ConstModel> findAll();
+
+    public List<ConstModel> findBySos(Long sosId);
+
+    public ConstModel findByPath(String path);
 }

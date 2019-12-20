@@ -2,10 +2,12 @@ package com.ava_sos.backend.demobackend.web.controller;
 
 import java.util.List;
 
+import com.ava_sos.backend.demobackend.domain.ConstModel;
 import com.ava_sos.backend.demobackend.domain.Sos;
-import com.ava_sos.backend.demobackend.domain.Stakeholder;
+
+import com.ava_sos.backend.demobackend.service.ConstModelService;
 import com.ava_sos.backend.demobackend.service.SosService;
-import com.ava_sos.backend.demobackend.service.StakeholderService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,48 +21,55 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/stakeholder")
-public class StakeholderController {
+@RequestMapping("/const_model")
+public class ConstModelController {
     
     @Autowired  
-    private StakeholderService stake_service;  
+    private ConstModelService const_service;  
 
     @Autowired
     private SosService sos_service;
 
     @PostMapping("/save")
     @CrossOrigin(origins = "http://localhost:4200")  
-    public void save(@RequestBody Stakeholder stake) {  
+    public void save(@RequestBody ConstModel consts) {  
         Sos aux = sos_service.findLast();
-        stake.setSos(aux);
-        stake_service.save(stake);  
+        consts.setSos(aux);
+        const_service.save(consts);  
 
     }  
       
     @GetMapping("/list")
     @CrossOrigin(origins = "http://localhost:4200")
-    public List<Stakeholder> findAll() {  
-        return stake_service.findAll();
+    public List<ConstModel> findAll() {  
+        return const_service.findAll();
 
     }
 
-    @DeleteMapping("/delete/{stakeholder_id}")
+    @DeleteMapping("/delete/{const_id}")
     @CrossOrigin(origins = "http://localhost:4200")
-    public void delete(@PathVariable("stakeholder_id") Long stakeholder_id) {
-        stake_service.delete(stakeholder_id);
+    public void delete(@PathVariable("const_id") Long const_id) {
+        const_service.delete(const_id);
     }
 
-    @GetMapping("/{stakeholder_id}")
+    @GetMapping("/{const_id}")
     @CrossOrigin(origins = "http://localhost:4200")
-    public Stakeholder findByID(@PathVariable("stakeholder_id") long stakeholder_id) {
-        return stake_service.findId(stakeholder_id);
+    public ConstModel findByID(@PathVariable("const_id") long const_id) {
+        return const_service.findId(const_id);
           
     }  
       
-    @PostMapping("/update/{stakeholder_id}")  
+    @PostMapping("/update/{const_id}")  
     @CrossOrigin(origins = "http://localhost:4200")
-    public void updateStakeholder(@RequestBody Stakeholder stake,@PathVariable("stakeholder_id") long stakeholder_id) {    
-        stake_service.update(stake);  
+    public void updateConstModel(@RequestBody ConstModel consts,@PathVariable("const_id") long const_id) {    
+        const_service.update(consts);  
+    }  
+
+    @GetMapping("/from_sos/{sos_id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<ConstModel> findBySos(@PathVariable("sos_id") long sos_id) {
+        return const_service.findBySos(sos_id);
+          
     }  
 
 }

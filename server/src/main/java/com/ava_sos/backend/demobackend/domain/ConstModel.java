@@ -13,21 +13,21 @@ import javax.persistence.*;
 @Table(name = "ConstituintModels")
 public class ConstModel extends AbstractEntity<Long> {
     
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = true, unique = false, length = 100)
     private String path;
 
-    @OneToMany(mappedBy = "model")
+    @OneToMany(mappedBy = "model", fetch = FetchType.EAGER)
     private List<Services> services;
-
-    @ManyToOne
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sos_id")
     private Sos sos;
-    
-    public String getFile() {
+
+    public String getPath() {
         return path;
     }
 
-    public void setFile(String path) {
+    public void setPath(String path) {
         this.path = path;
     }
 

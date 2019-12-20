@@ -40,7 +40,7 @@ public abstract class AbstractDao<T, PK extends Serializable> {
 		
 		return entityManager.find(entityClass, id);
 	}
-	
+
 	public List<T> findAll() {
 		
 		return entityManager
