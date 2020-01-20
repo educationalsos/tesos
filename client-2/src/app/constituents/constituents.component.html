@@ -1,0 +1,50 @@
+<ng-template matStepLabel >Fill out the services URI for constituents systems capacities</ng-template>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-tabs card-header-primary">
+        <div class="nav-tabs-navigation">
+          <div class="nav-tabs-wrapper">
+            <span class="nav-tabs-title">Constituents:</span>
+            <ul class="nav nav-tabs" data-tabs="tabs">
+              <li class="nav-item" >
+                <a mat-button class="nav-link" href="#messages" data-toggle="tab" (click)="setConstituents()">
+                  <i class="material-icons">bubble_chart</i> {{name}}
+                  <div class="ripple-container"></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane" id="messages">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td width="20%">To send video streaming</td>
+                  <td width="80%">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="To send video streaming URI" type="text">
+                      </mat-form-field>
+                    </td>
+                </tr>
+              </tbody>
+              <tr>
+                  <td>To receive streaming</td>
+                  <td>
+                      <mat-form-field >
+                        <input matInput placeholder="To receive video streaming URI" type="text">
+                      </mat-form-field>
+                    </td>
+                </tr>          
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

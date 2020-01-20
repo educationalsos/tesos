@@ -1,0 +1,7 @@
+<div class="main-content" >
+  <h2>Sos List</h2>
+  <div *ngFor="let sos of soss">
+    {{sos.name}}
+    <button (click)="remove(sos.id)">remove</button>
+  </div>
+</div>
