@@ -13,7 +13,7 @@ public class Services extends AbstractEntity<Long> {
     @JoinColumn(name = "model_id")
     private ConstModel model;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, unique = false, length = 100)
     private String link;
 
     @Column(nullable = false, unique = false, length = 60)

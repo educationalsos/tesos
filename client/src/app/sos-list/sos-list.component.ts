@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SosService } from '../sos/sos.service'
-import { ConstituentsService } from 'app/constituents/constituents.service';
-import { StakeholdersService } from 'app/stakeholders/stakeholders.service';
+import { ServicesService } from 'app/services/services.service';
+
 
 @Component({
   selector: 'app-sos-list',
@@ -11,13 +11,19 @@ import { StakeholdersService } from 'app/stakeholders/stakeholders.service';
 export class SosListComponent implements OnInit {
 
   soss: Array<any>;
+  stakes:Array<any>;
 
-
-  constructor(private sosService: StakeholdersService) { }
+  constructor(private sosService: SosService, private servicesService:ServicesService) { }
 
   ngOnInit() {
     this.sosService.getAll().subscribe(data=> {
       this.soss = data;
+      
+    });
+
+    this.soss.forEach(sos => {
+      this.stakes.push(this.servicesService.get(1));
+      
     });
 
   }

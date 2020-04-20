@@ -33,7 +33,7 @@ public class StakeholderController {
     public void save(@RequestBody Stakeholder stake) {  
         Sos aux = sos_service.findLast();
         stake.setSos(aux);
-        stake_service.save(stake);  
+        stake_service.save(stake);
 
     }  
       

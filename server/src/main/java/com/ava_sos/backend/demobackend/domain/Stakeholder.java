@@ -18,6 +18,7 @@ public class Stakeholder extends AbstractEntity<Long> {
     @JoinColumn(name = "sos_id")
     private Sos sos;
 
+
     public String getName() {
         return name;
     }

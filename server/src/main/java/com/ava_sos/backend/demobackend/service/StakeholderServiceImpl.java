@@ -41,6 +41,7 @@ public class StakeholderServiceImpl implements StakeholderService {
 
     @Override @Transactional(readOnly = true)
     public List<Stakeholder> findAll() {
+        
         return dao.findAll();
     }
 

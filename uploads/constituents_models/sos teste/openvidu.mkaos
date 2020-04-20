@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dsl.mKAOS:mKAOS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsl.mKAOS="dsl.mKAOS">
-  <linkedBy xsi:type="dsl.mKAOS:CommunicationOutputLink"/>
-  <linkedBy xsi:type="dsl.mKAOS:CommunicationOutputLink"/>
-  <linkedBy xsi:type="dsl.mKAOS:EmergeLink"/>
-  <consistsOf xsi:type="dsl.mKAOS:ConstituentSystem" name="video management system" capableOf="//@consistsOf.1"/>
-  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To recieve video streaming"/>
-</dsl.mKAOS:mKAOS>
