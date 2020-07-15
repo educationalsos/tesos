@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * ConstModel
  */
@@ -19,6 +22,7 @@ public class ConstModel extends AbstractEntity<Long> {
     @OneToMany(mappedBy = "model", fetch = FetchType.EAGER)
     private List<Services> services;
     
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sos_id")
     private Sos sos;
@@ -30,7 +34,7 @@ public class ConstModel extends AbstractEntity<Long> {
     public void setPath(String path) {
         this.path = path;
     }
-
+    
     public List<Services> getServices() {
         return services;
     }
@@ -39,10 +43,12 @@ public class ConstModel extends AbstractEntity<Long> {
         this.services = services;
     }
 
+    @JsonIgnore
     public Sos getSos() {
         return sos;
     }
 
+    @JsonProperty("sos")
     public void setSos(Sos sos) {
         this.sos = sos;
     }

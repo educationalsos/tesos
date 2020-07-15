@@ -34,8 +34,9 @@ public class SosController {
 
     @PostMapping("/save")
     @CrossOrigin(origins = "http://localhost:4200")
-    public void save(@RequestBody Sos sos) {
+    public Long save(@RequestBody Sos sos) {
         sos_service.save(sos);
+        return sos.getId();
 
     }
 

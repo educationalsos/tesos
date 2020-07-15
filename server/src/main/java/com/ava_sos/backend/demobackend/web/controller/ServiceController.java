@@ -2,7 +2,8 @@ package com.ava_sos.backend.demobackend.web.controller;
 
 import java.util.List;
 
-import com.ava_sos.backend.demobackend.domain.AuxService;
+import com.ava_sos.backend.demobackend.wrapper.ServiceWrapper;
+import com.ava_sos.backend.demobackend.domain.ConstModel;
 import com.ava_sos.backend.demobackend.domain.Services;
 
 import com.ava_sos.backend.demobackend.service.ConstModelService;
@@ -32,9 +33,8 @@ public class ServiceController {
 
     @PostMapping("/save")
     @CrossOrigin(origins = "http://localhost:4200")  
-    public void save(@RequestBody AuxService aux) {  
-        aux.serv.setModel(const_service.findByPath(aux.model_path));
-        serv_service.save(aux.serv);  
+    public void save(@RequestBody Services serv) {  
+        serv_service.save(serv);  
 
     }  
       

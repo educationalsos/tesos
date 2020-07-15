@@ -32,11 +32,9 @@ public class ConstModelController {
 
     @PostMapping("/save")
     @CrossOrigin(origins = "http://localhost:4200")  
-    public void save(@RequestBody ConstModel consts) {  
-        Sos aux = sos_service.findLast();
-        consts.setSos(aux);
+    public Long save(@RequestBody ConstModel consts) {  
         const_service.save(consts);  
-
+        return consts.getId();
     }  
       
     @GetMapping("/list")

@@ -24,6 +24,7 @@ export class ServicesService {
     if (serv['href']) {
       result = this.http.put(serv.href, serv);
     } else {
+      console.log(JSON.stringify(serv))
       result = this.http.post(this.CONST_API+ "/save", serv);
     }
     return result;

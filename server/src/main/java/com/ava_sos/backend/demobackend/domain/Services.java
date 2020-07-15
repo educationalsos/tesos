@@ -2,6 +2,9 @@ package com.ava_sos.backend.demobackend.domain;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 @SuppressWarnings("serial")
@@ -9,6 +12,8 @@ import javax.persistence.*;
 @Table(name = "Services")
 public class Services extends AbstractEntity<Long> {
 
+    
+    @JsonIgnore
     @ManyToOne(fetch =FetchType.LAZY )
     @JoinColumn(name = "model_id")
     private ConstModel model;
@@ -19,10 +24,12 @@ public class Services extends AbstractEntity<Long> {
     @Column(nullable = false, unique = false, length = 60)
     private String name;
 
+    @JsonIgnore
     public ConstModel getModel() {
         return model;
     }
 
+    @JsonProperty("model")
     public void setModel(ConstModel model) {
         this.model = model;
     }

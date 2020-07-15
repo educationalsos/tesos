@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsl.mKAOS:mKAOS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsl.mKAOS="dsl.mKAOS">
+  <linkedBy xsi:type="dsl.mKAOS:CommunicationOutputLink"/>
+  <linkedBy xsi:type="dsl.mKAOS:CommunicationOutputLink"/>
+  <linkedBy xsi:type="dsl.mKAOS:EmergeLink"/>
+  <consistsOf xsi:type="dsl.mKAOS:ConstituentSystem" name="Assignment management system" capableOf="//@consistOf.4//@consistsOf.3 //@consistsOf.2 //@consistsOf.1"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To assign new task"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To deliver assignments"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To grade assigments"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To access graded tasks"/>
+</dsl.mKAOS:mKAOS>
