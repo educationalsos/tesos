@@ -1,10 +1,6 @@
 package com.ava_sos.backend.demobackend.web.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.List;
 
 
@@ -66,22 +62,6 @@ public class SosController {
         sos_service.update(sos);
     }
 
-    @PostMapping("/upload_file")
-    @CrossOrigin(origins = "http://localhost:4200")
-    @ResponseBody
-    public void uploadFile(@RequestPart("file") MultipartFile file, @RequestPart("name") String sos, @RequestPart("type") String t) throws IOException {
-        byte[] bytes = file.getBytes();
-        Path path;
-        if (t.equals("1")) {
-            new File("../uploads/mkaos_models/"+sos).mkdirs();
-            path = Paths.get("../uploads/mkaos_models/"+sos, file.getOriginalFilename());
-            
-        } else {
-            new File("../uploads/constituents_models/"+sos).mkdirs();
-            path = Paths.get("../uploads/constituents_models/"+sos, file.getOriginalFilename());
-        }
-        Files.write(path, bytes);
- 
-    }
+    
 
 }

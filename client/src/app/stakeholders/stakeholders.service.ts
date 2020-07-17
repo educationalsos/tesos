@@ -24,7 +24,6 @@ export class StakeholdersService {
     if (stake['href']) {
       result = this.http.put(stake.href, stake);
     } else {
-      console.log(JSON.stringify(stake))
       result = this.http.post(this.STAKE_API+ "/save", stake);
     }
     return result;

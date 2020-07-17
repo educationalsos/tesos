@@ -29,7 +29,6 @@ export class ConstituentsService {
     if (model['href']) {
       result = this.http.put(model.href, model);
     } else {
-      console.log(JSON.stringify(model));
       result = this.http.post(this.CONST_API+ "/save", model);
     }
     return result;

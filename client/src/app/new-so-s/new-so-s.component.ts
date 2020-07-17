@@ -79,15 +79,14 @@ export class NewSoSComponent implements OnInit {
       this.sos.id = result;
     }, error => console.error(error), () =>{
       this.saveStake();
-      //this.saveConstituents();
       this.saveConstituentsAndServices();
+      this.router.navigate(['/list']);
     });
   
     this.uploadFile('1',this.mkaos_model_to_upload);
     this.constituents_models_to_upload.forEach(file => {
       this.uploadFile('2',file);      
     });
-    this.router.navigate(['/list']);
     
   }
 
@@ -131,9 +130,8 @@ export class NewSoSComponent implements OnInit {
       ()=>{
         for (let j = 0; j < this.model_services[i].length; j++) {
           this.model_services[i][j].model = this.constituents[i];
-          console.log(this.model_services[i][j]);
           this.servicesService.save(this.model_services[i][j]).subscribe(result=>{
-          }, error => console.log(error));
+          }, error => console.error(error));
         }
       })
       
@@ -141,7 +139,7 @@ export class NewSoSComponent implements OnInit {
   }
   handleMkaosModel(files: FileList) {
     this.mkaos_model_to_upload = files.item(0);
-    this.sos.mkaos_model = "../uploads/mkaos_model/"+this.sos.name+"/"+files.item(0).name;
+    this.sos.mkaos_model = "../uploads/mkaos_models/"+this.sos.name+"/"+files.item(0).name;
   }
   
   handleConstituintsModels(files: FileList) {
