@@ -2,7 +2,13 @@ package com.ava_sos.backend.demobackend.domain;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.hibernate.annotations.Fetch;
 
@@ -27,7 +33,6 @@ public class Sos extends AbstractEntity<Long>{
     @Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
     private List<Stakeholder> stakeholders;
 
-    
     @OneToMany(mappedBy = "sos", fetch = FetchType.EAGER)
     @Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
     private List<ConstModel> models;

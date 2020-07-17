@@ -24,6 +24,7 @@ export class NewSoSComponent implements OnInit {
   secondFormGroup: FormGroup;
 
   sos: Sos = {
+    id: null,
     name: "",
     description:"",
     mkaos_model: ""
@@ -32,11 +33,15 @@ export class NewSoSComponent implements OnInit {
 
 
   stakeholder: Stakeholder = {
-    name:""
+    name:"",
+    sos:null
   }
 
   constituent: Constituent = {
+    id: null,
     path: "",
+    services:null,
+    sos: null
   }
 
   mkaos_model_to_upload: File = null
@@ -71,10 +76,13 @@ export class NewSoSComponent implements OnInit {
 
   save() {
     this.sosService.save(this.sos).subscribe(result => {
-    }, error => console.error(error));
-    this.saveStake();
-    this.saveConstituents();
-    this.saveServices();
+      this.sos.id = result;
+    }, error => console.error(error), () =>{
+      this.saveStake();
+      this.saveConstituentsAndServices();
+      this.router.navigate(['/list']);
+    });
+  
     this.uploadFile('1',this.mkaos_model_to_upload);
     this.constituents_models_to_upload.forEach(file => {
       this.uploadFile('2',file);      
@@ -89,7 +97,7 @@ export class NewSoSComponent implements OnInit {
   }
 
   addStake(){
-    const aux = new Stakeholder(this.stakeholder.name);
+    const aux = new Stakeholder(this.stakeholder.name, null);
     this.stakeholders.push(aux);
   }
 
@@ -100,6 +108,7 @@ export class NewSoSComponent implements OnInit {
 
   saveStake(){
     this.stakeholders.forEach(stake => {
+      stake.sos = this.sos;
       this.stakeholderService.save(stake).subscribe(result => {
       }, error => console.error(error));
     });
@@ -112,26 +121,31 @@ export class NewSoSComponent implements OnInit {
     });
   }
 
-  saveServices(){
+  saveConstituentsAndServices(){
     for (let i = 0; i < this.constituents.length; i++) {
-      const aux = this.constituents[i];
-      for (let j = 0; j < this.model_services[i].length; j++) {
-        const elem = this.model_services[i][j];
-        this.servicesService.save(new AuxService(elem, aux.path)).subscribe(result=>{
-        }, error => console.log(error));
-      }
+      this.constituents[i].sos = this.sos;
+      this .constituentService.save(this.constituents[i]).subscribe(result =>{
+        this.constituents[i].id = result;
+      }, error => console.error(error),
+      ()=>{
+        for (let j = 0; j < this.model_services[i].length; j++) {
+          this.model_services[i][j].model = this.constituents[i];
+          this.servicesService.save(this.model_services[i][j]).subscribe(result=>{
+          }, error => console.error(error));
+        }
+      })
       
     }
   }
   handleMkaosModel(files: FileList) {
     this.mkaos_model_to_upload = files.item(0);
-    this.sos.mkaos_model = "../uploads/mkaos_model/"+this.sos.name+"/"+files.item(0).name;
+    this.sos.mkaos_model = "../uploads/mkaos_models/"+this.sos.name+"/"+files.item(0).name;
   }
   
   handleConstituintsModels(files: FileList) {
     for (let i = 0; i < files.length; i++) {
       this.constituents_models_to_upload.push(files.item(i));
-      const aux = new Constituent("../uploads/constituents_models/"+this.sos.name+"/"+files.item(i).name);
+      const aux = new Constituent(null,"../uploads/constituents_models/"+this.sos.name+"/"+files.item(i).name, null, null);
       this.constituents.push(aux);
     }
     
@@ -166,7 +180,7 @@ export class NewSoSComponent implements OnInit {
         var pos = line.indexOf("name=");
         var line1 = line.indexOf("capableOf=");
         if(pos >0 && line1 <0)
-          services.push(new Service(line.slice(pos+6, -3),""))
+          services.push(new Service(null,line.slice(pos+6, -3),"", null))
       })     
     };
     //services.shift();

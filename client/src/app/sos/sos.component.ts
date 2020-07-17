@@ -11,7 +11,7 @@ export class SosComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  sos = new Sos("","","");
+  sos = new Sos(null,"","","");
   ngOnInit() {
   }
 

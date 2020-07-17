@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 export class SosService {
   public API = '//localhost:8080';
   public SOS_API = this.API + '/sos';
+  public FILE_API = this.API+ '/file';
 
   constructor(private http: HttpClient) { }
 
@@ -33,8 +34,12 @@ export class SosService {
     return this.http.delete(this.SOS_API + '/delete/' + id);
   }
 
+  getMkaosModel(path: string){
+    return this.http.get(this.FILE_API + "/mkaos_model/"+ path,{responseType: 'text'});
+  }
+
   upload(file: FormData){
-    return this.http.post(this.SOS_API +"/upload_file", file);
+    return this.http.post(this.FILE_API +"/upload_file", file);
   }
 
 }
