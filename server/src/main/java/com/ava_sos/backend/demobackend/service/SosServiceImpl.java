@@ -1,9 +1,5 @@
 package com.ava_sos.backend.demobackend.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 import com.ava_sos.backend.demobackend.dao.SosDao;

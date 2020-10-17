@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsl.mKAOS:mKAOS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsl.kaos="dsl.kaos" xmlns:dsl.mKAOS="dsl.mKAOS">
+  <consistsOf xsi:type="dsl.mKAOS:ConstituentSystem" name="Google Calendar" capableOf="//@consistsOf.2 //@consistsOf.1"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To add new event"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To get calendar info" output="//@consistsOf.4"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Task" inputs="//@consistsOf.1"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Calendar"/>
+</dsl.mKAOS:mKAOS>

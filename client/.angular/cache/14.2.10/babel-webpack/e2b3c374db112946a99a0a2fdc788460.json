@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Service {\n  constructor(id, name, link, model) {\n    this.id = id;\n    this.name = name;\n    this.link = link;\n    this.model = model;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

@@ -1,4 +1,132 @@
 <div class="main-content">
-
-  
+  <div class="col-lg-6 col-md-12">
+    <div class="card">
+      <div class="card-header card-header-tabs card-header-primary">
+        <div class="nav-tabs-navigation">
+          <div class="nav-tabs-wrapper">
+            <h4 class="card-title">{{ sos.name }}</h4>
+            <p class="card-category">Test Requirements:</p>
+            <ul class="nav nav-tabs" data-tabs="tabs">
+              <li class="nav-item">
+                <a
+                  mat-button
+                  class="nav-link active"
+                  href="#unity"
+                  data-toggle="tab"
+                >
+                  <i class="material-icons">bug_report</i> Unity
+                  <div class="ripple-container"></div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  mat-button
+                  class="nav-link"
+                  href="#integration"
+                  data-toggle="tab"
+                >
+                  <i class="material-icons">bug_report</i> Integration
+                  <div class="ripple-container"></div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a mat-button class="nav-link" href="#system" data-toggle="tab">
+                  <i class="material-icons">bug_report</i> System
+                  <div class="ripple-container"></div>
+                </a>
+              </li>
+              <li style="align-self: end; margin-left: 50px">
+                <h4>Coverage: 45%</h4>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-body table-responsive">
+        <div class="tab-content">
+          <div class="tab-pane active" id="unity">
+            <table class="table table-hover">
+              <thead class="text-warning">
+                <th>Model</th>
+                <th>Name</th>
+                <th>Link</th>
+                <th>Check</th>
+              </thead>
+              <tbody *ngFor="let m of sos.models">
+                <tr *ngFor="let serv of m.services">
+                  <td>{{ m.id }}</td>
+                  <td>{{ serv.name }}</td>
+                  <td>{{ serv.link }}</td>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                        />
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane" id="integration">
+            <table class="table table-hover">
+              <thead class="text-warning">
+                <th>Name</th>
+                <th>Check</th>
+              </thead>
+              <tbody *ngFor="let behavior of behaviors.get(sos.id)">
+                <td>{{ behavior }}</td>
+                <td>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </td>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane" id="system">
+            <table class="table table-hover">
+              <thead class="text-warning">
+                <th>Name</th>
+                <th>Check</th>
+              </thead>
+              <tbody *ngFor="let mission of missions.get(sos.id)">
+                <td>{{ mission }}</td>
+                <td>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

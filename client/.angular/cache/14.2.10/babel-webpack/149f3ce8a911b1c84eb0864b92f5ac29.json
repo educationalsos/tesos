@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { SosComponent } from 'app/sos/sos.component';\nimport { NewSoSComponent } from 'app/new-so-s/new-so-s.component';\nexport const AdminLayoutRoutes = [{\n  path: 'sos/:id',\n  component: SosComponent\n}, {\n  path: 'add',\n  component: NewSoSComponent\n}];","map":null,"metadata":{},"sourceType":"module"}

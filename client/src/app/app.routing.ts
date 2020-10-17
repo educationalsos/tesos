@@ -4,36 +4,26 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { SosComponent } from './sos/sos.component';
 
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home',
     pathMatch: 'full',
-  }, {
+  }, 
+  {
+    path: 'sos/:id',
+    redirectTo: 'home',
+    component: SosComponent,
+  },{
     path: '',
     component: AdminLayoutComponent,
     children: [
         {
       path: '',
-      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-  }]}, 
-  /*      
-          {
-            path: 'car-edit/:id',
-            component: NewSoSComponent
-          }
- */
-    // { path: 'dashboard',      component: DashboardComponent },
-    // { path: 'user-profile',   component: UserProfileComponent },
-    // { path: 'table-list',     component: TableListComponent },
-    // { path: 'typography',     component: TypographyComponent },
-    // { path: 'icons',          component: IconsComponent },
-    // { path: 'maps',           component: MapsComponent },
-    // { path: 'notifications',  component: NotificationsComponent },
-    // { path: 'upgrade',        component: UpgradeComponent },
-    // { path: 'list',        component: SosListComponent },
-    // { path: '',               redirectTo: 'dashboard', pathMatch: 'full' }
+      loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
+  }]},
 ];
 
 @NgModule({

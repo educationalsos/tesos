@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
+import { UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { SosService } from 'app/sos/sos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Sos } from 'app/sos/sos';
 import { Stakeholder } from 'app/stakeholders/stakeholder';
-import { forEach } from '@angular/router/src/utils/collection';
 import { StakeholdersService } from 'app/stakeholders/stakeholders.service';
 import { Constituent } from 'app/constituents/constituent';
 import { ConstituentsService } from 'app/constituents/constituents.service';
@@ -20,8 +19,8 @@ import { AuxService } from 'app/services/auxservice';
   styleUrls: ['./new-so-s.component.scss']
 })
 export class NewSoSComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  firstFormGroup: UntypedFormGroup;
+  secondFormGroup: UntypedFormGroup;
 
   sos: Sos = {
     id: null,
@@ -52,7 +51,7 @@ export class NewSoSComponent implements OnInit {
   constituents: Array<Constituent> = []
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private sosService: SosService,
@@ -70,8 +69,8 @@ export class NewSoSComponent implements OnInit {
     });
   }
 
-  gotoList() {
-    this.router.navigate(['/list']);
+  gotoHome() {
+    this.router.navigate(['/home']);
   }
 
   save() {
@@ -79,20 +78,20 @@ export class NewSoSComponent implements OnInit {
       this.sos.id = result;
     }, error => console.error(error), () =>{
       this.saveStake();
-      this.saveConstituentsAndServices();
-      this.router.navigate(['/list']);
+      this.uploadFile('1',this.mkaos_model_to_upload);
+      this.constituents_models_to_upload.forEach(file => {
+        this.uploadFile('2',file);      
+      });
+      this.router.navigate(['/home']);
+      
     });
   
-    this.uploadFile('1',this.mkaos_model_to_upload);
-    this.constituents_models_to_upload.forEach(file => {
-      this.uploadFile('2',file);      
-    });
-    
+ 
   }
 
   remove(href) {
     this.sosService.remove(href).subscribe(result => {
-      this.gotoList();
+      this.gotoHome();
     }, error => console.error(error));
   }
 
@@ -139,7 +138,7 @@ export class NewSoSComponent implements OnInit {
   }
   handleMkaosModel(files: FileList) {
     this.mkaos_model_to_upload = files.item(0);
-    this.sos.mkaos_model = "../uploads/mkaos_models/"+this.sos.name+"/"+files.item(0).name;
+    this.sos.mkaos_model = "../uploads/mission_models/"+this.sos.name+"/"+files.item(0).name;
   }
   
   handleConstituintsModels(files: FileList) {
@@ -155,7 +154,7 @@ export class NewSoSComponent implements OnInit {
   uploadFile(type: string, file: File){
     let formData = new FormData(); 
     formData.append('file', file);
-    formData.append('name', this.sos.name);
+    formData.append('sos_id', this.sos.id);
     formData.append('type', type);
     this.sosService.upload(formData).subscribe(result => {
     }, error => console.error(error));;

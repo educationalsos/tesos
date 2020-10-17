@@ -1,8 +1,6 @@
 package com.ava_sos.backend.demobackend.web.controller;
 
-
 import java.util.List;
-
 
 import com.ava_sos.backend.demobackend.domain.Sos;
 
@@ -16,10 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/sos")
@@ -61,7 +56,5 @@ public class SosController {
     public void updatesos(@RequestBody Sos sos, @PathVariable("sos_id") long sos_id) {
         sos_service.update(sos);
     }
-
-    
 
 }

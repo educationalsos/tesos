@@ -13,20 +13,21 @@ import org.springframework.stereotype.Service;
 /**
  * ServicesServiceImpl
  */
-@Service @Transactional
+@Service
+@Transactional
 public class ServicesServiceImpl implements ServicesService {
 
     @Autowired
     ServicesDao dao;
 
     @Override
-    public void save(Services task) {
-        dao.save(task);
+    public void save(Services serv) {
+        dao.save(serv);
     }
 
     @Override
-    public void update(Services task) {
-        dao.update(task);
+    public void update(Services serv) {
+        dao.update(serv);
     }
 
     @Override
@@ -34,16 +35,22 @@ public class ServicesServiceImpl implements ServicesService {
         dao.delete(id);
     }
 
-    @Override @Transactional(readOnly = true)
+    @Override
+    @Transactional(readOnly = true)
     public Services findId(Long id) {
         return dao.findById(id);
     }
 
-    @Override @Transactional(readOnly = true)
+    @Override
+    @Transactional(readOnly = true)
     public List<Services> findAll() {
         return dao.findAll();
     }
 
+    @Override
+    public void saveAll(List<Services> servs) {
+        dao.saveAll(servs);
 
-    
+    }
+
 }

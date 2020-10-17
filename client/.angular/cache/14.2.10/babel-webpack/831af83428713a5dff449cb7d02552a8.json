@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Constituent {\n  constructor(id, path, services, sos) {\n    this.id = id;\n    this.path = path;\n    this.services = services;\n    this.sos = sos;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

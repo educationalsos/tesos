@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Sos } from 'app/sos/sos';
+import { SosService } from 'app/sos/sos.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -7,17 +9,11 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
+
 export const ROUTES: RouteInfo[] = [
-    { path: '/sos', title: 'Educational SoS',  icon: 'grain', class: '' },
-    { path: '/dashboard', title: 'Testing SoS',  icon: 'grain', class: '' },
-    { path: '/user-profile', title: 'Health SoS',  icon: 'grain', class: '' },
-    //{ path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-    //{ path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
-    //{ path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
-    //{ path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
-    //{ path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
-    //{ path: '/maps', title: 'Maps',  icon:'location_on', class: '' },
-    //{ path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
+  { path: '/sos', title: 'Educational SoS',  icon: 'grain', class: '' },
+  { path: '/dashboard', title: 'Testing SoS',  icon: 'grain', class: '' },
+  { path: '/user-profile', title: 'Health SoS',  icon: 'grain', class: '' }
 ];
 
 @Component({
@@ -26,12 +22,14 @@ export const ROUTES: RouteInfo[] = [
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
+  menuItems: Sos[];
 
-  constructor() { }
+  constructor(private sosService: SosService) { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.sosService.getAll().subscribe(data=> {
+      this.menuItems = data;
+    }, error => console.error(error), () =>{});
   }
   isMobileMenu() {
       if ($(window).width() > 991) {

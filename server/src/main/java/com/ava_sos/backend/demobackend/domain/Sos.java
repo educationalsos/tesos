@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import org.hibernate.annotations.Fetch;
 
 /**
@@ -18,8 +16,8 @@ import org.hibernate.annotations.Fetch;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "SOS")
-public class Sos extends AbstractEntity<Long>{
-    
+public class Sos extends AbstractEntity<Long> {
+
     @Column(nullable = false, unique = true, length = 30)
     private String name;
 
@@ -35,7 +33,15 @@ public class Sos extends AbstractEntity<Long>{
 
     @OneToMany(mappedBy = "sos", fetch = FetchType.EAGER)
     @Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
-    private List<ConstModel> models;
+    private List<Mission> missions;
+
+    @OneToMany(mappedBy = "sos", fetch = FetchType.EAGER)
+    @Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+    private List<Behavior> behaviors;
+
+    @OneToMany(mappedBy = "sos", fetch = FetchType.EAGER)
+    @Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+    private List<Constituent> constituents;
 
     public String getName() {
         return name;
@@ -69,12 +75,27 @@ public class Sos extends AbstractEntity<Long>{
         this.stakeholders = stakeholders;
     }
 
-    public List<ConstModel> getModels() {
-        return models;
+    public List<Constituent> getConstituents() {
+        return constituents;
     }
 
-    public void setModels(List<ConstModel> models) {
-        this.models = models;
+    public void setConstituents(List<Constituent> constituents) {
+        this.constituents = constituents;
     }
 
+    public List<Behavior> getBehaviors() {
+        return behaviors;
+    }
+
+    public void setBehaviors(List<Behavior> behaviors) {
+        this.behaviors = behaviors;
+    }
+
+    public List<Mission> getMissions() {
+        return missions;
+    }
+
+    public void setMissions(List<Mission> missions) {
+        this.missions = missions;
+    }
 }

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Stakeholder {\n  constructor(name, sos) {\n    this.name = name;\n    this.sos = sos;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

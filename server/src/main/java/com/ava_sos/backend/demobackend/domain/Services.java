@@ -5,18 +5,15 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "Services")
+@Table(name = "SERVICES")
 public class Services extends AbstractEntity<Long> {
 
-    
     @JsonIgnore
-    @ManyToOne(fetch =FetchType.LAZY )
-    @JoinColumn(name = "model_id")
-    private ConstModel model;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "constituent_id")
+    private Constituent constituent;
 
     @Column(nullable = false, unique = false, length = 100)
     private String link;
@@ -24,14 +21,26 @@ public class Services extends AbstractEntity<Long> {
     @Column(nullable = false, unique = false, length = 60)
     private String name;
 
-    @JsonIgnore
-    public ConstModel getModel() {
-        return model;
+    @Column(nullable = true, unique = false)
+    private Boolean satisfied;
+
+    public Services(Constituent constituent, String name, Boolean satisfied) {
+        this.constituent = constituent;
+        this.name = name;
+        this.satisfied = satisfied;
     }
 
-    @JsonProperty("model")
-    public void setModel(ConstModel model) {
-        this.model = model;
+    public Services() {
+    }
+
+    @JsonIgnore
+    public Constituent getConstituent() {
+        return constituent;
+    }
+
+    @JsonProperty("constituent")
+    public void setConstituent(Constituent constituent) {
+        this.constituent = constituent;
     }
 
     public String getLink() {
@@ -49,5 +58,13 @@ public class Services extends AbstractEntity<Long> {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    public Boolean getSatisfied() {
+        return satisfied;
+    }
+
+    public void setSatisfied(Boolean satisfied) {
+        this.satisfied = satisfied;
+    }
+
 }
