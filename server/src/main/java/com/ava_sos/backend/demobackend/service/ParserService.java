@@ -31,8 +31,6 @@ import com.ava_sos.backend.demobackend.domain.Sos;
 public class ParserService {
 
     @Autowired
-    private SosService sos_service;
-    @Autowired
     private BehaviorService behavior_service;
     @Autowired
     private MissionService mission_service;
@@ -43,10 +41,8 @@ public class ParserService {
     @Autowired
     private ComunicationalCapabilityService capability_service;
 
-    public void parseMissionModel(long sos_id) {
+    public void parseMissionModel(Sos sos) {
         try {
-            Sos sos = sos_service.findId(sos_id);
-
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -101,10 +97,8 @@ public class ParserService {
         }
     }
 
-    public void parseConstituentModel(String path, long sos_id) {
+    public void parseConstituentModel(String path, Sos sos) {
         try {
-            Sos sos = sos_service.findId(sos_id);
-
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             DocumentBuilder db = dbf.newDocumentBuilder();

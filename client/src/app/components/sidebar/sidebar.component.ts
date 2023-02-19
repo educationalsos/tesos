@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Sos } from 'app/sos/sos';
 import { SosService } from 'app/sos/sos.service';
 
@@ -24,12 +25,15 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: Sos[];
 
-  constructor(private sosService: SosService) { }
+  constructor(private sosService: SosService,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.sosService.getAll().subscribe(data=> {
-      this.menuItems = data;
-    }, error => console.error(error), () =>{});
+    this.route.paramMap.subscribe(params => {
+      this.sosService.getAll().subscribe(data=> {
+        this.menuItems = data;
+      }, error => console.error(error), () =>{});
+    })
+    
   }
   isMobileMenu() {
       if ($(window).width() > 991) {

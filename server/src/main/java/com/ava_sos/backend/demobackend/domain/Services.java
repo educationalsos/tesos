@@ -15,7 +15,7 @@ public class Services extends AbstractEntity<Long> {
     @JoinColumn(name = "constituent_id")
     private Constituent constituent;
 
-    @Column(nullable = false, unique = false, length = 100)
+    @Column(nullable = true, unique = false)
     private String link;
 
     @Column(nullable = false, unique = false, length = 60)

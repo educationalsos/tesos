@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
           <mat-horizontal-stepper labelPosition="bottom" #stepper>
-            <mat-step [stepControl]="firstFormGroup">
+            <mat-step [stepControl]="firstFormGroup" [completed]="true">
               <form [formGroup]="firstFormGroup" #sosForm="ngForm">
                 <ng-template matStepLabel>Upload your Mkaos Models</ng-template>
                 <div class="row">
@@ -44,7 +44,16 @@
                 <div class="row">
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Select your MKaos Model" />
+                      <input
+                        matInput
+                        placeholder="Select your Mission model"
+                        [(ngModel)]="mkaos_model_name"
+                        [ngModelOptions]="{ standalone: true }"
+                        type="text"
+                        [readonly]="true"
+                        required
+                        name="mkaos_model"
+                      />
                     </mat-form-field>
                   </div>
                   <div class="col-md-2">
@@ -62,9 +71,8 @@
                     <input
                       hidden
                       type="file"
-                      name="mkaos_model_to_upload"
+                      [(ngModel)]="mkaos_model_to_upload"
                       (change)="handleMkaosModel($event.target.files)"
-                      required
                       #fileInput
                     />
                   </div>
@@ -72,7 +80,13 @@
                     <mat-form-field class="example-full-width">
                       <input
                         matInput
-                        placeholder="Select your Contituents Model"
+                        placeholder="Select your Constituents models"
+                        [(ngModel)]="constituents_models_name"
+                        [ngModelOptions]="{ standalone: true }"
+                        [readonly]="true"
+                        type="text"
+                        required
+                        name="constituents_models"
                       />
                     </mat-form-field>
                   </div>
@@ -91,9 +105,8 @@
                     <input
                       hidden
                       type="file"
-                      name="constituints_models"
+                      [(ngModel)]="constituents_models_to_upload"
                       (change)="handleConstituintsModels($event.target.files)"
-                      required
                       #multipeFileInput
                       multiple
                     />
@@ -108,7 +121,6 @@
                         [(ngModel)]="stakeholder.name"
                         [ngModelOptions]="{ standalone: true }"
                         type="text"
-                        required
                         name="name"
                       />
                     </mat-form-field>
@@ -157,22 +169,21 @@
                           </table>
                         </div>
                       </div>
-                      <div>
-                        <button
-                          mat-raised-button
-                          matStepperNext
-                          class="btn btn-danger"
-                          (click)="handleServices()"
-                        >
-                          Next
-                        </button>
-                      </div>
                     </div>
+                  </div>
+                  <div>
+                    <button
+                      mat-raised-button
+                      class="btn btn-danger"
+                      (click)="save(stepper)"
+                    >
+                      Next
+                    </button>
                   </div>
                 </div>
               </form>
             </mat-step>
-            <mat-step [stepControl]="secondFormGroup" optional>
+            <mat-step [stepControl]="secondFormGroup">
               <form [formGroup]="secondFormGroup">
                 <ng-template matStepLabel
                   >Fill out the services URI for constituents systems
@@ -180,17 +191,16 @@
                 >
                 <div
                   class="row"
-                  *ngFor="
-                    let model of constituents_models_to_upload;
-                    let i = index
-                  "
+                  *ngFor="let model of sos.constituents; let i = index"
                 >
                   <div class="col-md-12">
                     <div class="card">
                       <div class="card-header">
                         <div class="nav-tabs-navigation">
                           <div class="nav-tabs-wrapper">
-                            <span class="nav-tabs-title">Constituents:</span>
+                            <span class="nav-tabs-title"
+                              >Constituent System:</span
+                            >
                             <p>{{ model.name }}</p>
                           </div>
                         </div>
@@ -198,19 +208,14 @@
                       <div class="card-body">
                         <table class="table">
                           <tbody>
-                            <tr
-                              *ngFor="
-                                let service of model_services[i];
-                                let j = index
-                              "
-                            >
+                            <tr *ngFor="let service of model.services">
                               <td width="20%">{{ service.name }}</td>
                               <td width="80%">
                                 <mat-form-field class="example-full-width">
                                   <input
                                     matInput
-                                    placeholder="To send video streaming URI"
-                                    [(ngModel)]="model_services[i][j].link"
+                                    placeholder="API link for this service"
+                                    [(ngModel)]="service.link"
                                     [ngModelOptions]="{ standalone: true }"
                                     type="text"
                                     required
@@ -237,36 +242,12 @@
                     mat-raised-button
                     matStepperNext
                     class="btn btn-danger"
+                    (click)="updateServices()"
                   >
                     Next
                   </button>
                 </div>
               </form>
-            </mat-step>
-            <mat-step>
-              <ng-template matStepLabel>Done</ng-template>
-              <h3>You are now done.</h3>
-              <br />
-              <br />
-              <div>
-                <button
-                  mat-raised-button
-                  matStepperPrevious
-                  class="btn btn-danger"
-                >
-                  Back
-                </button>
-                <a>
-                  <button
-                    mat-raised-button
-                    matStepperNext
-                    class="btn btn-danger"
-                    (click)="save()"
-                  >
-                    Finish
-                  </button>
-                </a>
-              </div>
             </mat-step>
           </mat-horizontal-stepper>
         </div>

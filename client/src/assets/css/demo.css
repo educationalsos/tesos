@@ -24,3 +24,14 @@
   width: 260px;
 }
 
+h4, .h4{
+  font-size: 1.7rem;
+}
+
+.nav-tabs .nav-item .nav-link{
+  font-size: 18px;
+}
+
+.card {
+  font-size: 1.1rem;
+}

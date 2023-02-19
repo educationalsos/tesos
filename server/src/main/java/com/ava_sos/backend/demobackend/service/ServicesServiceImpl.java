@@ -27,6 +27,8 @@ public class ServicesServiceImpl implements ServicesService {
 
     @Override
     public void update(Services serv) {
+        Services aux = dao.findById(serv.getId());
+        serv.setConstituent(aux.getConstituent());
         dao.update(serv);
     }
 
@@ -50,6 +52,16 @@ public class ServicesServiceImpl implements ServicesService {
     @Override
     public void saveAll(List<Services> servs) {
         dao.saveAll(servs);
+
+    }
+
+    @Override
+    public void updateAll(List<Services> servs) {
+        for (Services serv : servs) {
+            Services aux = dao.findById(serv.getId());
+            serv.setConstituent(aux.getConstituent());
+        }
+        dao.updateAll(servs);
 
     }
 

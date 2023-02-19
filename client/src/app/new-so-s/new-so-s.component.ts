@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import { UntypedFormBuilder, Validators} from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SosService } from 'app/sos/sos.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,6 +11,7 @@ import { ConstituentsService } from 'app/constituents/constituents.service';
 import { Service } from 'app/services/service';
 import { ServicesService } from 'app/services/services.service';
 import { AuxService } from 'app/services/auxservice';
+import { MatStepper } from '@angular/material/stepper';
 
 
 @Component({
@@ -18,9 +19,14 @@ import { AuxService } from 'app/services/auxservice';
   templateUrl: './new-so-s.component.html',
   styleUrls: ['./new-so-s.component.scss']
 })
-export class NewSoSComponent implements OnInit {
-  firstFormGroup: UntypedFormGroup;
-  secondFormGroup: UntypedFormGroup;
+export class NewSoSComponent {
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required]
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required]
+  });
+
 
   sos: Sos = {
     id: null,
@@ -29,63 +35,49 @@ export class NewSoSComponent implements OnInit {
     mkaos_model: ""
   };
 
-
-
   stakeholder: Stakeholder = {
     name:"",
     sos:null
   }
 
-  constituent: Constituent = {
-    id: null,
-    path: "",
-    services:null,
-    sos: null
-  }
-
   mkaos_model_to_upload: File = null
+  mkaos_model_name: String = ""
+  constituents_models_name: String = ""
   constituents_models_to_upload: Array<File> = []
 
   model_services: Array<Array<Service>> = []
   stakeholders: Array<Stakeholder> = []
-  constituents: Array<Constituent> = []
+
 
   constructor(
     private _formBuilder: UntypedFormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private sosService: SosService,
     private servicesService: ServicesService,
     private stakeholderService: StakeholdersService,
-    private constituentService: ConstituentsService
     ) { }
-
-  ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-  }
 
   gotoHome() {
     this.router.navigate(['/home']);
   }
 
-  save() {
+  save(stepper: MatStepper) {
     this.sosService.save(this.sos).subscribe(result => {
       this.sos.id = result;
-    }, error => console.error(error), () =>{
+    }, error => console.error(error), async () =>{
       this.saveStake();
-      this.uploadFile('1',this.mkaos_model_to_upload);
-      this.constituents_models_to_upload.forEach(file => {
-        this.uploadFile('2',file);      
+      await this.uploadFile('1',this.mkaos_model_to_upload);
+      await Promise.all(this.constituents_models_to_upload.map(async file => {
+        await this.uploadFile('2',file);      
+      }))
+      this.sosService.get(this.sos.id).subscribe((data: Sos)=> {
+        this.sos = data;
+      }, error => console.error(error), () =>{
+        stepper.next()
       });
-      this.router.navigate(['/home']);
-      
+
     });
-  
+    
  
   }
 
@@ -113,79 +105,39 @@ export class NewSoSComponent implements OnInit {
     });
   }
 
-  saveConstituents(){
-    this.constituents.forEach(model => {
-      this.constituentService.save(model).subscribe(result => {
-      }, error => console.error(error));
-    });
+  goForward(stepper: MatStepper){
+    stepper.next();
   }
 
-  saveConstituentsAndServices(){
-    for (let i = 0; i < this.constituents.length; i++) {
-      this.constituents[i].sos = this.sos;
-      this .constituentService.save(this.constituents[i]).subscribe(result =>{
-        this.constituents[i].id = result;
-      }, error => console.error(error),
-      ()=>{
-        for (let j = 0; j < this.model_services[i].length; j++) {
-          this.model_services[i][j].model = this.constituents[i];
-          this.servicesService.save(this.model_services[i][j]).subscribe(result=>{
-          }, error => console.error(error));
-        }
-      })
-      
-    }
-  }
   handleMkaosModel(files: FileList) {
     this.mkaos_model_to_upload = files.item(0);
+    this.mkaos_model_name = files.item(0).name
     this.sos.mkaos_model = "../uploads/mission_models/"+this.sos.name+"/"+files.item(0).name;
   }
   
   handleConstituintsModels(files: FileList) {
     for (let i = 0; i < files.length; i++) {
       this.constituents_models_to_upload.push(files.item(i));
-      const aux = new Constituent(null,"../uploads/constituents_models/"+this.sos.name+"/"+files.item(i).name, null, null);
-      this.constituents.push(aux);
+      if (i> 0) {
+        this.constituents_models_name += ", "
+      }
+      this.constituents_models_name += files.item(i).name
     }
-    
-    
   }
 
-  uploadFile(type: string, file: File){
+  async updateServices(){
+    await Promise.all(this.sos.constituents.map(async constituent => {
+      await this.servicesService.update_all(constituent.services).toPromise();      
+    }))
+
+    this.router.navigate(['/sos', this.sos.id]);
+  }
+
+  async uploadFile(type: string, file: File){
     let formData = new FormData(); 
     formData.append('file', file);
-    formData.append('sos_id', this.sos.id);
+    formData.append('sos_id', this.sos.id.toString());
     formData.append('type', type);
-    this.sosService.upload(formData).subscribe(result => {
-    }, error => console.error(error));;
+    await this.sosService.upload(formData).toPromise();
   }
-  
-  handleServices(){
-    for (let i = 0; i < this.constituents.length; i++) {
-      this.model_services.push(this.readServices(new Array<Service>(), i)) ;
-    }
-    
-    
-  }
-
-  readServices(services: Array<Service>, i: number){
-    let r = new FileReader();
-    r.readAsText(this.constituents_models_to_upload[i]);
-
-    r.onload = function(e) {
-      var rawLog = r.result;
-      var logLines = (rawLog as string).split(/[\r\n]+/);
-      logLines.forEach(line=>{
-        var pos = line.indexOf("name=");
-        var line1 = line.indexOf("capableOf=");
-        if(pos >0 && line1 <0)
-          services.push(new Service(null,line.slice(pos+6, -3),"", null))
-      })     
-    };
-    //services.shift();
-    return services;
-
-  }
-
-
 }

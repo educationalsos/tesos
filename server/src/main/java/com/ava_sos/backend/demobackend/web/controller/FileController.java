@@ -12,33 +12,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ava_sos.backend.demobackend.domain.Sos;
 import com.ava_sos.backend.demobackend.service.ParserService;
+import com.ava_sos.backend.demobackend.service.SosService;
 
 @RestController
 @RequestMapping("/file")
 public class FileController {
 
     @Autowired
+    private SosService sos_service;
+    @Autowired
     public ParserService parser;
 
     @PostMapping("/upload_file")
     @CrossOrigin(origins = "http://localhost:4200")
     @ResponseBody
-    public void uploadFile(@RequestPart("file") MultipartFile file, @RequestPart("sos_id") Long sos_id,
+    public void uploadFile(@RequestPart("file") MultipartFile file, @RequestPart("sos_id") String id,
             @RequestPart("type") String t) throws IOException {
         byte[] bytes = file.getBytes();
         Path path;
+        Sos sos = sos_service.findId(Long.parseLong(id));
         if (t.equals("1")) {
-            new File("../uploads/mission_models/" + sos_id).mkdirs();
-            path = Paths.get("../uploads/mission_models/" + sos_id, file.getOriginalFilename());
+            new File("../uploads/mission_models/" + sos.getName()).mkdirs();
+            path = Paths.get("../uploads/mission_models/" + sos.getName(), file.getOriginalFilename());
             Files.write(path, bytes);
-            parser.parseMissionModel(sos_id);
+            parser.parseMissionModel(sos);
 
         } else {
-            new File("../uploads/constituents_models/" + sos_id).mkdirs();
-            path = Paths.get("../uploads/constituents_models/" + sos_id, file.getOriginalFilename());
+            new File("../uploads/constituents_models/" + sos.getName()).mkdirs();
+            path = Paths.get("../uploads/constituents_models/" + sos.getName(), file.getOriginalFilename());
             Files.write(path, bytes);
-            parser.parseConstituentModel(path.toString(), sos_id);
+            parser.parseConstituentModel(path.toString(), sos);
         }
 
     }
@@ -54,15 +59,8 @@ public class FileController {
 
             return file;
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
-    }
-
-    @PostMapping("/test")
-    @ResponseBody
-    public void getModel(@RequestPart("sos_id") int sos_id) {
-        parser.parseMissionModel(sos_id);
     }
 }

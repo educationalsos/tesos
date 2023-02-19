@@ -11,10 +11,11 @@
                 <a
                   mat-button
                   class="nav-link active"
-                  href="#unity"
+                  href="#unit"
                   data-toggle="tab"
+                  (click)="changeCoverage('unit')"
                 >
-                  <i class="material-icons">bug_report</i> Unity
+                  <i class="material-icons">bug_report</i> Unit
                   <div class="ripple-container"></div>
                 </a>
               </li>
@@ -24,19 +25,26 @@
                   class="nav-link"
                   href="#integration"
                   data-toggle="tab"
+                  (click)="changeCoverage('integration')"
                 >
                   <i class="material-icons">bug_report</i> Integration
                   <div class="ripple-container"></div>
                 </a>
               </li>
               <li class="nav-item">
-                <a mat-button class="nav-link" href="#system" data-toggle="tab">
+                <a
+                  mat-button
+                  class="nav-link"
+                  href="#system"
+                  data-toggle="tab"
+                  (click)="changeCoverage('system')"
+                >
                   <i class="material-icons">bug_report</i> System
                   <div class="ripple-container"></div>
                 </a>
               </li>
               <li style="align-self: end; margin-left: 50px">
-                <h4>Coverage: 45%</h4>
+                <h4>Coverage: {{ coverage }}%</h4>
               </li>
             </ul>
           </div>
@@ -44,17 +52,19 @@
       </div>
       <div class="card-body table-responsive">
         <div class="tab-content">
-          <div class="tab-pane active" id="unity">
+          <div class="tab-pane active" id="unit">
             <table class="table table-hover">
               <thead class="text-warning">
+                <th>Id</th>
                 <th>Model</th>
                 <th>Name</th>
                 <th>Link</th>
                 <th>Check</th>
               </thead>
-              <tbody *ngFor="let m of sos.models">
+              <tbody *ngFor="let m of sos.constituents">
                 <tr *ngFor="let serv of m.services">
-                  <td>{{ m.id }}</td>
+                  <td>{{ serv.id }}</td>
+                  <td>{{ m.name }}</td>
                   <td>{{ serv.name }}</td>
                   <td>{{ serv.link }}</td>
                   <td>
@@ -64,9 +74,13 @@
                           class="form-check-input"
                           type="checkbox"
                           value=""
+                          [attr.checked]="serv.satisfied ? '' : null"
                         />
                         <span class="form-check-sign">
-                          <span class="check"></span>
+                          <span
+                            class="check"
+                            (click)="onCheckUnit(serv)"
+                          ></span>
                         </span>
                       </label>
                     </div>
@@ -78,25 +92,33 @@
           <div class="tab-pane" id="integration">
             <table class="table table-hover">
               <thead class="text-warning">
-                <th>Name</th>
+                <th>Emergent Behavior</th>
+                <th>Comunicational Capability</th>
                 <th>Check</th>
               </thead>
-              <tbody *ngFor="let behavior of behaviors.get(sos.id)">
-                <td>{{ behavior }}</td>
-                <td>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                      />
-                      <span class="form-check-sign">
-                        <span class="check"></span>
-                      </span>
-                    </label>
-                  </div>
-                </td>
+              <tbody *ngFor="let b of sos.behaviors">
+                <tr *ngFor="let cm_cap of b.comunicationalCapabilities">
+                  <td>{{ b.name }}</td>
+                  <td>{{ cm_cap.name }}</td>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          [attr.checked]="cm_cap.satisfied ? '' : null"
+                        />
+                        <span class="form-check-sign">
+                          <span
+                            class="check"
+                            (click)="onCheckIntegration(cm_cap)"
+                          ></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -106,22 +128,28 @@
                 <th>Name</th>
                 <th>Check</th>
               </thead>
-              <tbody *ngFor="let mission of missions.get(sos.id)">
-                <td>{{ mission }}</td>
-                <td>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                      />
-                      <span class="form-check-sign">
-                        <span class="check"></span>
-                      </span>
-                    </label>
-                  </div>
-                </td>
+              <tbody>
+                <tr *ngFor="let mission of sos.missions">
+                  <td>{{ mission.name }}</td>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          [attr.checked]="mission.satisfied ? '' : null"
+                        />
+                        <span class="form-check-sign">
+                          <span
+                            class="check"
+                            (click)="onCheckSystem(mission)"
+                          ></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

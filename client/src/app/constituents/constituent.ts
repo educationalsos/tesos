@@ -5,7 +5,7 @@ export class Constituent {
     constructor(
         public id: number,
         public path: String,
-        public services: Service,
+        public services: Array<Service>,
         public sos: Sos
         
     ) {

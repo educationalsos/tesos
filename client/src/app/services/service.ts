@@ -5,7 +5,8 @@ export class Service {
         public id: number,
         public name: String,
         public link: String,
-        public model: Constituent
+        public constituent: Constituent,
+        public satisfied: boolean
     ) {
         
     }

@@ -35,6 +35,10 @@ public abstract class AbstractDao<T, PK extends Serializable> {
 		entityManager.merge(entity);
 	}
 
+	public void updateAll(List<T> entities) {
+		entities.forEach(entityManager::merge);
+	}
+
 	public void delete(PK id) {
 
 		entityManager.remove(entityManager.getReference(entityClass, id));

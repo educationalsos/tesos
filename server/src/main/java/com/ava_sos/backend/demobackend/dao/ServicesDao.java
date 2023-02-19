@@ -11,9 +11,11 @@ public interface ServicesDao {
 
     public void save(Services entity);
 
-    public void saveAll(List<Services> entity);
+    public void saveAll(List<Services> entities);
 
     public void update(Services entity);
+
+    public void updateAll(List<Services> entities);
 
     public void delete(Long id);
 

@@ -47,13 +47,20 @@ public class ServiceController {
     @CrossOrigin(origins = "http://localhost:4200")
     public Services findByID(@PathVariable("serv_id") long serv_id) {
         return serv_service.findId(serv_id);
-
     }
 
     @PostMapping("/update/{serv_id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public void updateService(@RequestBody Services serv, @PathVariable("serv_id") long serv_id) {
+        System.out.println("#############################################");
         serv_service.update(serv);
+    }
+
+    @PostMapping("/update_all")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public void updateAllService(@RequestBody List<Services> servs) {
+
+        serv_service.updateAll(servs);
     }
 
 }

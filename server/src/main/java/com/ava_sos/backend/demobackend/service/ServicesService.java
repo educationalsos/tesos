@@ -15,6 +15,8 @@ public interface ServicesService {
 
     public void update(Services serv);
 
+    public void updateAll(List<Services> servs);
+
     public void delete(Long id);
 
     public Services findId(Long id);

@@ -27,6 +27,8 @@ public class ComunicationalCapabilityServiceImpl implements ComunicationalCapabi
 
     @Override
     public void update(ComunicationalCapability cmCapability) {
+        ComunicationalCapability aux = dao.findById(cmCapability.getId());
+        cmCapability.setBehavior(aux.getBehavior());
         dao.update(cmCapability);
     }
 

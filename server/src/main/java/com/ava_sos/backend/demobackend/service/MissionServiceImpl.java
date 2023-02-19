@@ -27,6 +27,8 @@ public class MissionServiceImpl implements MissionService {
 
     @Override
     public void update(Mission mission) {
+        Mission aux = dao.findById(mission.getId());
+        mission.setSos(aux.getSos());
         dao.update(mission);
     }
 
