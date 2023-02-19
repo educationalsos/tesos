@@ -2,7 +2,7 @@ package com.ava_sos.backend.demobackend.dao;
 
 import java.util.List;
 
-import com.ava_sos.backend.demobackend.domain.Services;
+import com.ava_sos.backend.demobackend.SoSdomain.Services;
 
 /**
  * SatkeholdersDao

@@ -1,8 +1,8 @@
 package com.ava_sos.backend.demobackend.dao;
 
-import com.ava_sos.backend.demobackend.domain.Constituent;
-
 import org.springframework.stereotype.Repository;
+
+import com.ava_sos.backend.demobackend.SoSdomain.Constituent;
 
 /**
  * SosDaoImpl

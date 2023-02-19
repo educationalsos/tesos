@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsl.mKAOS:mKAOS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsl.kaos="dsl.kaos" xmlns:dsl.mKAOS="dsl.mKAOS">
+  <consistsOf xsi:type="dsl.mKAOS:ConstituentSystem" name="RosarioSis" capableOf="//@consistsOf.2 //@consistsOf.1 //@consistsOf.3 //@consistsOf.5 //@consistsOf.4 //@consistsOf.6 //@consistsOf.7"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To add student"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To get course info" output="//@consistsOf.8"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To enroll student in a course"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To grade student"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To add course"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To get student info" output="//@consistsOf.10"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To get grades" output="//@consistsOf.9"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Course Info"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Grades"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Student Info"/>
+</dsl.mKAOS:mKAOS>

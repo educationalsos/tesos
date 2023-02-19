@@ -2,7 +2,7 @@ package com.ava_sos.backend.demobackend.dao;
 
 import java.util.List;
 
-import com.ava_sos.backend.demobackend.domain.ComunicationalCapability;
+import com.ava_sos.backend.demobackend.SoSdomain.ComunicationalCapability;
 
 public interface ComunicationalCapabilityDao {
     public void save(ComunicationalCapability entity);

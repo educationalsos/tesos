@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsl.mKAOS:mKAOS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsl.kaos="dsl.kaos" xmlns:dsl.mKAOS="dsl.mKAOS">
+  <consistsOf xsi:type="dsl.mKAOS:ConstituentSystem" name="Sapos" capableOf="//@consistsOf.2 //@consistsOf.1 //@consistsOf.4 //@consistsOf.3 //@consistsOf.5 //@consistsOf.6"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To add student"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To get course info" output="//@consistsOf.7"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To register student in a course"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To add a course"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To get student info" output="//@consistsOf.8"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To update students grades"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Courses Info"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Student Info"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Student Grade" inputs="//@consistsOf.6"/>
+</dsl.mKAOS:mKAOS>

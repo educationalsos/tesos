@@ -1,8 +1,8 @@
 package com.ava_sos.backend.demobackend.dao;
 
-import com.ava_sos.backend.demobackend.domain.Stakeholder;
-
 import org.springframework.stereotype.Repository;
+
+import com.ava_sos.backend.demobackend.SoSdomain.Stakeholder;
 
 /**
  * StakeholderDaoImpl
@@ -11,5 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class StakeholderDaoImpl extends AbstractDao<Stakeholder, Long> implements StakeholderDao {
 
-    
 }

@@ -1,8 +1,8 @@
 package com.ava_sos.backend.demobackend.dao;
 
-import com.ava_sos.backend.demobackend.domain.Services;
-
 import org.springframework.stereotype.Repository;
+
+import com.ava_sos.backend.demobackend.SoSdomain.Services;
 
 /**
  * ServicesDaoImpl
@@ -11,5 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ServicesDaoImpl extends AbstractDao<Services, Long> implements ServicesDao {
 
-    
 }

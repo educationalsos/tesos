@@ -2,7 +2,7 @@ package com.ava_sos.backend.demobackend.dao;
 
 import java.util.List;
 
-import com.ava_sos.backend.demobackend.domain.Mission;
+import com.ava_sos.backend.demobackend.SoSdomain.Mission;
 
 public interface MissionDao {
 

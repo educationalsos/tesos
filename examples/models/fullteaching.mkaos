@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsl.mKAOS:mKAOS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsl.kaos="dsl.kaos" xmlns:dsl.mKAOS="dsl.mKAOS">
+  <consistsOf xsi:type="dsl.mKAOS:ConstituentSystem" name="FullTeaching" capableOf="//@consistsOf.2 //@consistsOf.1 //@consistsOf.5 //@consistsOf.7 //@consistsOf.9"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To attend sessions"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To post questions in forum"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Forum" inputs="//@consistsOf.2"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Classes Info" inputs="//@consistsOf.1"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To check courses information"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Courses Info" inputs="//@consistsOf.5"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To create a course"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Course Info" inputs="//@consistsOf.7"/>
+  <consistsOf xsi:type="dsl.mKAOS:OperationalCapability" name="To get task info" output="//@consistsOf.10"/>
+  <consistsOf xsi:type="dsl.kaos:Entity" name="Task info"/>
+</dsl.mKAOS:mKAOS>
